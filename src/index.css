@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 175 70% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 175 70% 50%;
+
+    --secondary: 210 15% 93%;
+    --secondary-foreground: 220 20% 25%;
+
+    --muted: 210 15% 95%;
+    --muted-foreground: 215 15% 50%;
+
+    --accent: 175 60% 92%;
+    --accent-foreground: 175 70% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 88%;
+    --input: 210 20% 92%;
+    --ring: 175 70% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(175 70% 40%), hsl(185 70% 45%));
+    --gradient-subtle: linear-gradient(180deg, hsl(210 20% 98%), hsl(210 15% 95%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 20% 99%));
+    
+    --shadow-soft: 0 4px 20px -4px hsl(220 25% 10% / 0.08);
+    --shadow-medium: 0 8px 30px -6px hsl(220 25% 10% / 0.12);
+    --shadow-glow: 0 0 40px hsl(175 70% 40% / 0.2);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .dark {
+    --background: 220 25% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 175 70% 50%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 175 70% 60%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 210 15% 85%;
+
+    --muted: 220 15% 16%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 175 50% 15%;
+    --accent-foreground: 175 70% 70%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 175 70% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(175 70% 50%), hsl(185 70% 55%));
+    --gradient-subtle: linear-gradient(180deg, hsl(220 25% 8%), hsl(220 20% 10%));
+    --gradient-card: linear-gradient(145deg, hsl(220 20% 14%), hsl(220 20% 12%));
+    
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 8px 30px -6px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 40px hsl(175 70% 50% / 0.25);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient-subtle);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply backdrop-blur-xl bg-card/80;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-0.5;
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(175 70% 40% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(175 70% 40% / 0.5);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
