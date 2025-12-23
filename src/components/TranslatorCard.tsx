@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { LanguageSelector, languages } from "@/components/LanguageSelector";
 import { useToast } from "@/hooks/use-toast";
 import { useI18n } from "@/lib/i18n";
+import { translateText } from "@/lib/api";
 
 export function TranslatorCard() {
   const [sourceLanguage, setSourceLanguage] = useState("en");
@@ -35,26 +36,20 @@ export function TranslatorCard() {
 
     setIsTranslating(true);
     
-    // Simulate translation (will be replaced with actual AI translation)
     try {
-      const sourceLang = languages.find((l) => l.code === sourceLanguage)?.name;
-      const targetLang = languages.find((l) => l.code === targetLanguage)?.name;
-      
-      // Mock translation for now - shows the structure
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
-      setTranslatedText(
-        `[${t("translationFrom")} ${sourceLang} ${t("translationTo")} ${targetLang}]\n\n"${sourceText}"\n\n(${t("connectCloud")})`
-      );
+      // Call the backend API for translation
+      const translated = await translateText(sourceText, sourceLanguage, targetLanguage);
+      setTranslatedText(translated);
       
       toast({
         title: t("translationComplete"),
         description: t("translationSuccess"),
       });
     } catch (error) {
+      console.error("Translation error:", error);
       toast({
         title: t("translationFailed"),
-        description: t("translationError"),
+        description: error instanceof Error ? error.message : t("translationError"),
         variant: "destructive",
       });
     } finally {
