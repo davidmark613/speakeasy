@@ -9,7 +9,7 @@ import { translateText } from "@/lib/api";
 
 export function TranslatorCard() {
   const [sourceLanguage, setSourceLanguage] = useState("en");
-  const [targetLanguage, setTargetLanguage] = useState("es");
+  const [targetLanguage, setTargetLanguage] = useState("he");
   const [sourceText, setSourceText] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [isTranslating, setIsTranslating] = useState(false);
